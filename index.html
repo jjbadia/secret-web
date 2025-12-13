@@ -70,25 +70,24 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div id="panel" class="container">
         <div class="lock-icon">🔒</div>
         <h1>Zona Confidencial</h1>
         <p>Introduce el código para acceder al documento seguro</p>
         <input type="password" id="codigo" placeholder="Código secreto">
         <button onclick="verificarCodigo()">Acceder</button>
-        <button onclick="toggleMusica()" id="btnMusica">🎵 Activar música</button>
         <p class="error" id="mensaje"></p>
     </div>
 
     <!-- Música oculta -->
-    <audio id="musica" controls>
-        musica.mp3
+    <audio id="musica" autoplay loop>
+        <source src="./musica.mp3" type="audio/mpeg">
         Tu navegador no soporta audio.
     </audio>
 
     <script>
         function verificarCodigo() {
-            const codigoCorrecto = "12345"; // Código secreto
+            const codigoCorrecto = "gimnasio"; // Código secreto
             const codigoIngresado = document.getElementById("codigo").value;
             const mensaje = document.getElementById("mensaje");
 
@@ -104,16 +103,29 @@
 
         function toggleMusica() {
             const musica = document.getElementById("musica");
-            const btn = document.getElementById("btnMusica");
-
+          
             if (musica.paused) {
                 musica.play();
-                btn.textContent = "⏸ Pausar música";
             } else {
                 musica.pause();
-                btn.textContent = "🎵 Activar música";
             }
         }
+
+
+document.body.addEventListener("click", function(e) {
+    const panel = document.getElementById("panel");
+    const musica = document.getElementById("musica");
+
+    if (!panel.contains(e.target)) {
+       if (musica.paused) {
+                musica.play();
+            } else {
+                musica.pause();
+            }
+    }
+});
+
+        
     </script>
 </body>
 </html>
