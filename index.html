@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Zona Confidencial</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #00c6ff;
+        }
+        p {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        input[type="password"] {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #00c6ff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0078d7;
+            color: #fff;
+        }
+        .error {
+            color: #ff4d4d;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .lock-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #00c6ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lock-icon">🔒</div>
+        <h1>Zona Confidencial</h1>
+        <p>Introduce el código para acceder al documento seguro</p>
+        <input type="password" id="codigo" placeholder="Código secreto">
+        <button onclick="verificarCodigo()">Acceder</button>
+        <button onclick="toggleMusica()" id="btnMusica">🎵 Activar música</button>
+        <p class="error" id="mensaje"></p>
+    </div>
+
+    <!-- Música oculta -->
+    <audio id="musica" controls>
+        musica.mp3
+        Tu navegador no soporta audio.
+    </audio>
+
+    <script>
+        function verificarCodigo() {
+            const codigoCorrecto = "12345"; // Código secreto
+            const codigoIngresado = document.getElementById("codigo").value;
+            const mensaje = document.getElementById("mensaje");
+
+            if (codigoIngresado === codigoCorrecto) {
+                window.location.href = "documento.pdf"; // Documento confidencial
+            } else {
+                mensaje.textContent = "Código incorrecto. Acceso denegado.";
+                setTimeout(() => {
+                    mensaje.textContent = "";
+                }, 5000); // Borra el mensaje tras 5 segundos
+            }
+        }
+
+        function toggleMusica() {
+            const musica = document.getElementById("musica");
+            const btn = document.getElementById("btnMusica");
+
+            if (musica.paused) {
+                musica.play();
+                btn.textContent = "⏸ Pausar música";
+            } else {
+                musica.pause();
+                btn.textContent = "🎵 Activar música";
+            }
+        }
+    </script>
+</body>
+</html>
